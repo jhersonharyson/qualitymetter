@@ -8,11 +8,12 @@ inputs:
     default: .
 
 runs:
-  runs-on: ubuntu-latest
-  using: "composite"
-  steps:
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 20
-    - run: npm run scan --srcDir "${{inputs.source-path}}" --outputDir "./my-output-path" --format "json"
+  quality:
+      name: Quality
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 20
+        - run: npm run scan --srcDir "${{inputs.source-path}}" --outputDir "./my-output-path" --format "json"
 
