@@ -3,9 +3,9 @@ const { execSync, exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-// const rootDir = process.argv[3]
+
 // ${{ github.workspace }}
-console.log({rootDir})
+
 
 const out = execSync('ls').toString()
 console.log({maintainability: out})
