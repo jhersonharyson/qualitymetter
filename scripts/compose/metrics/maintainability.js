@@ -7,6 +7,10 @@ const path = require('path');
 // ${{ github.workspace }}
 
 
+const out = execSync('cd report && ls -R').toString()
+console.log({maintainability: out.toString()})
+
+
 // Função para calcular a média do acoplamento do projeto
 const calculateProjectCoupling = (report) => {
     const files = report.reports;
