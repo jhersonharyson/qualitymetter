@@ -33,17 +33,17 @@ if(!srcDir || !outputDir){
 
 AppLogger.info('***** Code audit start *****');
 
-/**
- * Cleaning workspace
- */
-if(fs.existsSync(outputDir)) {
-  try{
-    execSync(`rm -rf ${outputDir}`);
-  } catch(error){
-    AppLogger.info(`Code auditor cleaning workspace error:  ${error.message}`);
-    process.exit(-1);
-  }
-}
+// /**
+//  * Cleaning workspace
+//  */
+// if(fs.existsSync(outputDir)) {
+//   try{
+//     execSync(`rm -rf ${outputDir}`);
+//   } catch(error){
+//     AppLogger.info(`Code auditor cleaning workspace error:  ${error.message}`);
+//     process.exit(-1);
+//   }
+// }
 
 /**
  * Starts the code complexity audit.
