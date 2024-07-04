@@ -7,7 +7,7 @@ const path = require('path');
 // ${{ github.workspace }}
 
 
-const out = execSync('ls').toString()
+const out = execSync('cd report && ls').toString()
 console.log({maintainability: out})
 
 
@@ -47,7 +47,7 @@ const getMaintainability = async () => {
         console.log('collecting maintainability metrics...')
 
 
-        const complexityReport = JSON.parse(fs.readdirSync(rootDir+'/report/code-complexity-audit/CodeComplexityReport.json').toString())
+        const complexityReport = JSON.parse(fs.readdirSync('./report/code-complexity-audit/CodeComplexityReport.json').toString())
         const maintainability = Number(complexityReport.summary.average.maintainability)
         return { maintainability };
 
@@ -60,7 +60,7 @@ const getMaintainability = async () => {
 
 const getCoupling = () => {
 
-    const couplingReport = JSON.parse(fs.readdirSync(rootDir+'/report/code-coupling-audit/CodeCouplingReport.json').toString())
+    const couplingReport = JSON.parse(fs.readdirSync('./report/code-coupling-audit/CodeCouplingReport.json').toString())
     // const svg = fs.readFileSync('../report/code-coupling-audit/CodeCouplingReport.svg')
 
 
