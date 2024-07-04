@@ -1,5 +1,5 @@
 
-// const { busFactor } = require('./busFactor');
+const { busFactor } = require('./metrics/busFactor');
 // const { getCommit } = require('./commit');
 // const { getMaintainability, getCoupling } = require('./maintainability');
 const fs = require('fs');
@@ -57,7 +57,7 @@ const getMetrics = async () => {
     r.code_smell = r.code_smells;
     r.number_of_lines = r.ncloc;
 
-    const { busFactor: factor, authors } = {}; //busFactor()
+    const { busFactor: factor, authors } = busFactor()
     r.bus_factor = factor;
     r.committer = authors;
 

@@ -32,3 +32,7 @@ runs:
     - name: List files
       run: ls
       shell: bash
+
+    - name: Show metrics
+      run: cat ./metrics.json
+      shell: bash
