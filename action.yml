@@ -21,6 +21,7 @@ runs:
       run: |
         sudo apt update
         sudo apt install -y graphviz
+      shell: bash
 
     - name: Install dependecies
       run: cd ${{ github.action_path }}/scripts/complexity && npm install
