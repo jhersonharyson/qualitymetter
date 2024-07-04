@@ -16,9 +16,9 @@ import CodeSecurityUtils from './kernel/security/CodeSecurityUtils.js';
  * Destructures the values from the parsed arguments.
  * @type {Object}
  */
-const srcDir = process.argv[2],
-  outputDir = process.argv[3],
-  format = process.argv[4];
+const srcDir = process.argv[3],
+  outputDir = process.argv[5],
+  format = process.argv[7];
 
 console.log({args: process.argv})
 
