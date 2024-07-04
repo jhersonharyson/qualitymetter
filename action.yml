@@ -13,8 +13,14 @@ runs:
       with:
         node-version: 20
     
-    - name: some step
+    - name: Echo test
+      run: echo test
       shell: bash
-    - run: echo test
-    - run: ls
-    - run: node --version
+
+    - name: List files
+      run: ls
+      shell: bash
+
+    - name: Check Node.js version
+      run: node --version
+      shell: bash
