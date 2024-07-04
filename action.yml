@@ -17,6 +17,11 @@ runs:
       run: echo test
       shell: bash
 
+    - name: Install Graphviz
+      run: |
+        sudo apt update
+        sudo apt install -y graphviz
+
     - name: Install dependecies
       run: cd ${{ github.action_path }}/scripts/complexity && npm install
       shell: bash
