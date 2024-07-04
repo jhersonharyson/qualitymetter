@@ -3,6 +3,12 @@ const { execSync, exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+// const rootDir = process.argv[3]
+// ${{ github.workspace }}
+console.log({rootDir})
+
+const out = execSync('ls').toString()
+console.log({maintainability: out})
 
 
 // Função para calcular a média do acoplamento do projeto
@@ -41,7 +47,7 @@ const getMaintainability = async () => {
         console.log('collecting maintainability metrics...')
 
 
-        const complexityReport = require('./report/code-complexity-audit/CodeComplexityReport.json')
+        const complexityReport = JSON.parse(fs.readdirSync(rootDir+'/report/code-complexity-audit/CodeComplexityReport.json').toString())
         const maintainability = Number(complexityReport.summary.average.maintainability)
         return { maintainability };
 
@@ -54,7 +60,7 @@ const getMaintainability = async () => {
 
 const getCoupling = () => {
 
-    const couplingReport = require('./report/code-coupling-audit/CodeCouplingReport.json')
+    const couplingReport = JSON.parse(fs.readdirSync(rootDir+'/report/code-coupling-audit/CodeCouplingReport.json').toString())
     // const svg = fs.readFileSync('../report/code-coupling-audit/CodeCouplingReport.svg')
 
 
