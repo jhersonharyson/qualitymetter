@@ -22,7 +22,7 @@ runs:
       shell: bash
 
     - name: Check Node.js version
-      run: node ${{ github.action_path }}/scripts/compose/index.js --path ./sonar-mymetrics.json --output ./compose-metric.json && echo "Compose metrics results written to  ./compose-metric.json"
+      run: node ${{ github.action_path }}/scripts/compose/index.js --path ./sonar-mymetrics.json --output . && echo "Compose metrics results written to  ./compose-metric.json"
       shell: bash
 
     - name: List files
