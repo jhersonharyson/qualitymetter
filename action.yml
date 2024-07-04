@@ -17,6 +17,14 @@ runs:
       run: echo test
       shell: bash
 
+    - name: Echo test
+      run: | 
+        cd .. && ls
+        cd .. && ls
+        cd .. && ls
+        cd .. && ls
+      shell: bash
+
     - name: Install Graphviz
       run: |
         sudo apt update
