@@ -13,18 +13,6 @@ runs:
       with:
         node-version: 20
     
-    - name: Echo test
-      run: echo test
-      shell: bash
-
-    - name: Echo test
-      run: | 
-        cd .. && ls
-        cd .. && ls
-        cd .. && ls
-        cd .. && ls
-      shell: bash
-
     - name: Install Graphviz
       run: |
         sudo apt update
@@ -39,18 +27,8 @@ runs:
       run: node ${{ github.action_path }}/scripts/complexity/src/index.js --srcDir "./" --outputDir "./report" --format "json"  && echo "Compose metrics results written to  ./metric.json"
       shell: bash
 
-    - name: List files
-      run: |
-        cd report
-        ls -R
-      shell: bash
-
     - name: Collecting metrics
       run: node ${{ github.action_path }}/scripts/compose/index.js --path ./sonar-mymetrics.json --output . --complexityReportPath ${{ github.workspace }} && echo "Compose metrics results written to  ./metric.json"
-      shell: bash
-
-    - name: List files
-      run: ls
       shell: bash
 
     - name: Show metrics
