@@ -22,6 +22,7 @@ const srcDir = process.argv[2],
   outputDir = process.argv[3],
   format = process.argv[4];
 
+console.log({args: process.argv})
 
 /**
  * Checks if the source directory and output directory are provided.
