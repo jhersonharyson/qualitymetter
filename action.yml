@@ -14,6 +14,5 @@ runs:
     - uses: actions/setup-node@v4
       with:
         node-version: 20
-      shell: bash
       - run: npm run scan --srcDir "${{inputs.source-path}}" --outputDir "./my-output-path" --format "json"
 
