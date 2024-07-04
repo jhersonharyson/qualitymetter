@@ -38,7 +38,7 @@ runs:
       shell: bash
 
     - name: Collecting metrics
-      run: node ${{ github.action_path }}/scripts/compose/index.js --path ./sonar-mymetrics.json --output . && echo "Compose metrics results written to  ./metric.json"
+      run: node ${{ github.action_path }}/scripts/compose/index.js --path ./sonar-mymetrics.json --output . --complexityReportPath ${{ github.workspace }} && echo "Compose metrics results written to  ./metric.json"
       shell: bash
 
     - name: List files

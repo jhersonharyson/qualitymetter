@@ -17,6 +17,7 @@ function getArgumentValue(argName) {
 
 const path = getArgumentValue('path');
 const output = getArgumentValue('output');
+const complexityReportPath = getArgumentValue('complexityReportPath')
 
 if (!path || !output) {
     console.error('Missing arguments: path or output');
@@ -60,12 +61,12 @@ const getMetrics = async () => {
     r.bus_factor = factor;
     r.committer = authors;
 
-    const { maintainability } = await getMaintainability()
+    const { maintainability } = await getMaintainability({path: complexityReportPath})
 
     r.score = maintainability;
     r.maintainability = maintainability;
 
-    const { efferentCoupling, afferentCoupling } = getCoupling()
+    const { efferentCoupling, afferentCoupling } = getCoupling({path: complexityReportPath})
 
     r.coupling = efferentCoupling;
     r.efferentCoupling = efferentCoupling;

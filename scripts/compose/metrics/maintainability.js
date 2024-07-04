@@ -38,7 +38,7 @@ const calculateProjectCoupling = (report) => {
 
 
 
-const getMaintainability = async () => {
+const getMaintainability = async ({path}) => {
     console.log('collecting health-meter... '+__dirname)
 
 
@@ -46,7 +46,7 @@ const getMaintainability = async () => {
         console.log('collecting maintainability metrics...')
 
 
-        const complexityReport = JSON.parse(fs.readdirSync('./report/code-complexity-audit/CodeComplexityReport.json').toString())
+        const complexityReport = JSON.parse(fs.readdirSync(path+'/report/code-complexity-audit/CodeComplexityReport.json').toString())
         const maintainability = Number(complexityReport.summary.average.maintainability)
         return { maintainability };
 
@@ -57,9 +57,9 @@ const getMaintainability = async () => {
 };
 
 
-const getCoupling = () => {
+const getCoupling = ({path}) => {
 
-    const couplingReport = JSON.parse(fs.readdirSync('./report/code-coupling-audit/CodeCouplingReport.json').toString())
+    const couplingReport = JSON.parse(fs.readdirSync(path+'/report/code-coupling-audit/CodeCouplingReport.json').toString())
     // const svg = fs.readFileSync('../report/code-coupling-audit/CodeCouplingReport.svg')
 
 
