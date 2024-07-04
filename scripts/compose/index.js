@@ -1,6 +1,6 @@
 
 const { busFactor } = require('./metrics/busFactor');
-// const { getCommit } = require('./commit');
+const { getCommit } = require('./metrics/commit');
 // const { getMaintainability, getCoupling } = require('./maintainability');
 const fs = require('fs');
 const process = require('process');
@@ -72,7 +72,7 @@ const getMetrics = async () => {
     r.efferentCoupling = efferentCoupling;
     r.afferentCoupling = afferentCoupling;
 
-    const { commit_hash, commit_date, lines_per_commit } = {}; //await getCommit()
+    const { commit_hash, commit_date, lines_per_commit } = await getCommit()
     r.commit_hash = commit_hash;
     r.branch_name = 'retro';
     r.createdAt = commit_date;
