@@ -85,17 +85,17 @@ const codeComplexityAnalysisResult = await CodeComplexityAuditor.startAudit(
   }
 );
 
-/**
- * Writes the audit result to files.
- */
-CodeComplexityUtils
-  .writeCodeComplexityAuditToFile({
-    codeComplexityOptions: {
-      outputDir: `${outputDir}/code-complexity-audit`,
-      fileFormat: format, // html or json
-    },
-    codeComplexityAnalysisResult,
-  });
+// /**
+//  * Writes the audit result to files.
+//  */
+// CodeComplexityUtils
+//   .writeCodeComplexityAuditToFile({
+//     codeComplexityOptions: {
+//       outputDir: `${outputDir}/code-complexity-audit`,
+//       fileFormat: format, // html or json
+//     },
+//     codeComplexityAnalysisResult,
+//   });
 
 /**
  * Starts the code coupling audit.
