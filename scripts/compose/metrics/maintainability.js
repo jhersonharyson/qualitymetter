@@ -41,7 +41,7 @@ const getMaintainability = async () => {
         console.log('collecting maintainability metrics...')
 
 
-        const complexityReport = require('../../report/code-complexity-audit/CodeComplexityReport.json')
+        const complexityReport = require('./report/code-complexity-audit/CodeComplexityReport.json')
         const maintainability = Number(complexityReport.summary.average.maintainability)
         return { maintainability };
 
@@ -54,7 +54,7 @@ const getMaintainability = async () => {
 
 const getCoupling = () => {
 
-    const couplingReport = require('../../report/code-coupling-audit/CodeCouplingReport.json')
+    const couplingReport = require('./report/code-coupling-audit/CodeCouplingReport.json')
     // const svg = fs.readFileSync('../report/code-coupling-audit/CodeCouplingReport.svg')
 
 
