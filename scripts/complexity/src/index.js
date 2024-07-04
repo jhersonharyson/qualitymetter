@@ -20,7 +20,6 @@ const srcDir = process.argv[3],
   outputDir = process.argv[5],
   format = process.argv[7];
 
-console.log({args: process.argv})
 
 /**
  * Checks if the source directory and output directory are provided.
@@ -85,17 +84,17 @@ const codeComplexityAnalysisResult = await CodeComplexityAuditor.startAudit(
   }
 );
 
-// /**
-//  * Writes the audit result to files.
-//  */
-// CodeComplexityUtils
-//   .writeCodeComplexityAuditToFile({
-//     codeComplexityOptions: {
-//       outputDir: `${outputDir}/code-complexity-audit`,
-//       fileFormat: format, // html or json
-//     },
-//     codeComplexityAnalysisResult,
-//   });
+/**
+ * Writes the audit result to files.
+ */
+CodeComplexityUtils
+  .writeCodeComplexityAuditToFile({
+    codeComplexityOptions: {
+      outputDir: `${outputDir}/code-complexity-audit`,
+      fileFormat: format, // html or json
+    },
+    codeComplexityAnalysisResult,
+  });
 
 /**
  * Starts the code coupling audit.
