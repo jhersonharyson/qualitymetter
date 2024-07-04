@@ -1,7 +1,8 @@
 
 const { busFactor } = require('./metrics/busFactor');
 const { getCommit } = require('./metrics/commit');
-// const { getMaintainability, getCoupling } = require('./maintainability');
+const { getMaintainability, getCoupling } = require('./metrics/maintainability');
+
 const fs = require('fs');
 const process = require('process');
 
@@ -51,22 +52,20 @@ const result = JSON.parse(file);
 
 const getMetrics = async () => {
     const r = result.component.measures.reduce((acc, m) => ({ ...acc, [m.metric]: +m.value }), {});
-    r.bug = r.bugs;
     r.vulnerability = r.vulnerabilities;
     r.duplication = r.duplicated_lines_density;
-    r.code_smell = r.code_smells;
     r.number_of_lines = r.ncloc;
 
     const { busFactor: factor, authors } = busFactor()
     r.bus_factor = factor;
     r.committer = authors;
 
-    const { maintainability } = {}; //await getMaintainability()
+    const { maintainability } = await getMaintainability()
 
     r.score = maintainability;
     r.maintainability = maintainability;
 
-    const { efferentCoupling, afferentCoupling } = {}; //getCoupling()
+    const { efferentCoupling, afferentCoupling } = getCoupling()
 
     r.coupling = efferentCoupling;
     r.efferentCoupling = efferentCoupling;
@@ -74,7 +73,7 @@ const getMetrics = async () => {
 
     const { commit_hash, commit_date, lines_per_commit } = await getCommit()
     r.commit_hash = commit_hash;
-    r.branch_name = 'retro';
+    r.branch_name = '';
     r.createdAt = commit_date;
     r.lines_per_commit = lines_per_commit;
 
