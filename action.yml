@@ -18,7 +18,7 @@ runs:
       shell: bash
 
     - name: Install dependecies
-      run: cd ${{ github.action_path }}/scripts/complexity npm install
+      run: cd ${{ github.action_path }}/scripts/complexity && npm install
       shell: bash
 
     - name: Running complexity metrics
