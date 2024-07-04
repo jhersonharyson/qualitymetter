@@ -7,7 +7,7 @@ const path = require('path');
 // ${{ github.workspace }}
 
 
-const out = execSync('cd report && ls').toString()
+const out = execSync('cd report && ls -R').toString()
 console.log({maintainability: out})
 
 
