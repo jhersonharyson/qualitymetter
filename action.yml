@@ -17,12 +17,16 @@ runs:
       run: echo test
       shell: bash
 
-    - name: List files
-      run: ls
+    - name: Install dependecies
+      run: cd ${{ github.action_path }}/scripts/complexity npm install && npm run scan --srcDir "../${projectName}" --outputDir "../report" --format "json"  && echo "Compose metrics results written to  ./metric.json"
       shell: bash
 
-    - name: Check Node.js version
-      run: node ${{ github.action_path }}/scripts/compose/index.js --path ./sonar-mymetrics.json --output . && echo "Compose metrics results written to  ./compose-metric.json"
+    - name: Running complexity metrics
+      run: node ${{ github.action_path }}/scripts/complexity/src/index.js --srcDir "./" --outputDir "./report" --format "json"  && echo "Compose metrics results written to  ./metric.json"
+      shell: bash
+
+    - name: Collecting metrics
+      run: node ${{ github.action_path }}/scripts/compose/index.js --path ./sonar-mymetrics.json --output . && echo "Compose metrics results written to  ./metric.json"
       shell: bash
 
     - name: List files
