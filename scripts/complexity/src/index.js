@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import fs from 'fs-extra';
 import { execSync } from 'child_process';
 import { parseArgs } from 'node:util';
@@ -34,17 +32,44 @@ if(!srcDir || !outputDir){
 
 AppLogger.info('***** Code audit start *****');
 
-// /**
-//  * Cleaning workspace
-//  */
-// if(fs.existsSync(outputDir)) {
-//   try{
-//     execSync(`rm -rf ${outputDir}`);
-//   } catch(error){
-//     AppLogger.info(`Code auditor cleaning workspace error:  ${error.message}`);
-//     process.exit(-1);
-//   }
-// }
+/**
+ * Cleaning workspace
+ */
+if(fs.existsSync(outputDir)) {
+  try{
+    execSync(`rm -rf ${outputDir}`);
+  } catch(error){
+    AppLogger.info(`Code auditor cleaning workspace error:  ${error.message}`);
+    process.exit(-1);
+  }
+}
+
+const deleteFolderRecursive = (folderPath) => {
+  console.log('deleting folder: ', folderPath);
+  if (fs.existsSync(folderPath)) {
+    fs.readdirSync(folderPath).forEach((file) => {
+      const currentPath = path.join(folderPath, file);
+      if (fs.lstatSync(currentPath).isDirectory()) {
+        // Recursively delete contents of subdirectory
+        deleteFolderRecursive(currentPath);
+      } else {
+        // Delete file
+        fs.unlinkSync(currentPath);
+      }
+    });
+    // Delete empty folder
+    fs.rmdirSync(folderPath);
+  }
+};
+
+const clear = (filePath) => {
+  // deleteFolderRecursive(srcDir+'/node_modules');
+  // deleteFolderRecursive(srcDir+'/coverage');
+  // deleteFolderRecursive(srcDir+'/dist');
+};
+
+clear();
+
 
 /**
  * Starts the code complexity audit.
