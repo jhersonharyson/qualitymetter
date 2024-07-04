@@ -46,7 +46,7 @@ const getMaintainability = async ({path}) => {
         console.log('collecting maintainability metrics...')
 
 
-        const complexityReport = JSON.parse(fs.readdirSync(path+'/report/code-complexity-audit/CodeComplexityReport.json').toString())
+        const complexityReport = JSON.parse(fs.readFileSync(path+'/report/code-complexity-audit/CodeComplexityReport.json').toString())
         const maintainability = Number(complexityReport.summary.average.maintainability)
         return { maintainability };
 
@@ -59,7 +59,7 @@ const getMaintainability = async ({path}) => {
 
 const getCoupling = ({path}) => {
 
-    const couplingReport = JSON.parse(fs.readdirSync(path+'/report/code-coupling-audit/CodeCouplingReport.json').toString())
+    const couplingReport = JSON.parse(fs.readFileSync(path+'/report/code-coupling-audit/CodeCouplingReport.json').toString())
     // const svg = fs.readFileSync('../report/code-coupling-audit/CodeCouplingReport.svg')
 
 
