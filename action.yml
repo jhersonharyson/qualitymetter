@@ -22,5 +22,9 @@ runs:
       shell: bash
 
     - name: Check Node.js version
-      run: node --version
+      run: node ${{ github.action_path }}/scripts/compose/index.js --path ./sonar-mymetrics.json --output ./compose-metric.json && echo "Compose metrics results written to  ${SONAR_GITROOT}/compose-metric.json
+      shell: bash
+
+    - name: List files
+      run: ls
       shell: bash
