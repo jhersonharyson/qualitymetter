@@ -41,5 +41,5 @@ runs:
       shell: bash
 
     - name: Sending metrics
-      run: node ${{ github.action_path }}/scripts/send/index.js --projectName ${{inputs.project-name}} --metrics ./metrics.json"
+      run: node ${{ github.action_path }}/scripts/send/index.js --projectName ${{inputs.project-name}} --metrics ./metrics.json
       shell: bash
