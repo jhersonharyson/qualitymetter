@@ -6,6 +6,11 @@ inputs:
     description: "Source Path from Git Root"
     required: true
     default: .
+  project-name:
+    description: "Project name"
+    required: true
+    default: ${{github.event.repository.name}}
+
 runs:
   using: "composite"
   steps:
@@ -33,4 +38,8 @@ runs:
 
     - name: Show metrics
       run: cat ./metrics.json
+      shell: bash
+
+    - name: Sending metrics
+      run: node ${{ github.action_path }}/scripts/send/index.js --projectName ${{inputs.sonar-project-name}} --metrics ./metrics.json"
       shell: bash
