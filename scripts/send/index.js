@@ -9,7 +9,8 @@ if (!projectName || !metricsFile) {
     process.exit(0);
 }
 
-const metrics = require(metricsFile);
+const metrics = JSON.parse(fs.readFileSync(metricsFile).toString())
+
 const requestOptions = {
     method: "GET",
     redirect: "follow"
