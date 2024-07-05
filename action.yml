@@ -9,7 +9,7 @@ inputs:
   project-name:
     description: "Project name"
     required: true
-    default: ${{github.event.repository.name}}
+    default: .
 
 runs:
   using: "composite"
@@ -41,5 +41,5 @@ runs:
       shell: bash
 
     - name: Sending metrics
-      run: node ${{ github.action_path }}/scripts/send/index.js --projectName ${{inputs.sonar-project-name}} --metrics ./metrics.json"
+      run: node ${{ github.action_path }}/scripts/send/index.js --projectName ${{inputs.project-name}} --metrics ./metrics.json"
       shell: bash
