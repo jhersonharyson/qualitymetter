@@ -29,11 +29,11 @@ runs:
       shell: bash
 
     - name: Running complexity metrics
-      run: node ${{ github.action_path }}/scripts/complexity/src/index.js --srcDir "./" --outputDir "./report" --format "json"  && echo "Compose metrics results written to  ./metric.json"
+      run: node ${{ github.action_path }}/scripts/complexity/src/index.js --srcDir "./" --outputDir "./report" --format "json"  && echo "Composed metrics results written to  ./metric.json"
       shell: bash
 
     - name: Collecting metrics
-      run: node ${{ github.action_path }}/scripts/compose/index.js --path ./sonar-mymetrics.json --output . --complexityReportPath ${{ github.workspace }} && echo "Compose metrics results written to  ./metric.json"
+      run: node ${{ github.action_path }}/scripts/compose/index.js --path ./sonar-mymetrics.json --output . --complexityReportPath ${{ github.workspace }} --branchName ${{ github.ref_name }} && echo "Collected metrics results written to  ./metric.json"
       shell: bash
 
     - name: Show metrics

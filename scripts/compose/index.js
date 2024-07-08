@@ -18,6 +18,7 @@ function getArgumentValue(argName) {
 const path = getArgumentValue('path');
 const output = getArgumentValue('output');
 const complexityReportPath = getArgumentValue('complexityReportPath')
+const branchName = getArgumentValue('branchName')
 
 if (!path || !output) {
     console.error('Missing arguments: path or output');
@@ -74,7 +75,7 @@ const getMetrics = async () => {
 
     const { commit_hash, commit_date, lines_per_commit } = await getCommit()
     r.commit_hash = commit_hash;
-    r.branch_name = '';
+    r.branch_name = branchName;
     r.createdAt = commit_date;
     r.lines_per_commit = lines_per_commit;
 
