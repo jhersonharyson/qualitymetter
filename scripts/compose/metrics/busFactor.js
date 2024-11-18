@@ -3,7 +3,10 @@ const { execSync } = require('child_process');
 // Função para obter os logs do Git
 const getGitLog = () => {
   try {
-    const logOutput = execSync("git log -n 200 --pretty=format:'%h author:%an' --numstat").toString();
+    const startFrom = new Date().getFullYear();
+    const commitsFromDate = execSync(`git rev-list --count --since="${startFrom}" HEAD`).toString().trim()
+    console.log(`Getting ${commitsFromDate} from ${startFrom} until now`)
+    const logOutput = execSync(`git log -n ${commitsFromDate} --pretty=format:'%h author:%an' --numstat`).toString();
     return logOutput;
   } catch (error) {
     console.error("Erro ao executar o comando git log:", error);
@@ -31,9 +34,14 @@ const parseGitLog = (logOutput) => {
       }
 
       // Numstat line: added lines, removed lines, and file name
-      const [added] = line.split('\t');
+      // Faz o split da linha, garantindo que os valores sejam corretamente separados
+      const [added, removed] = line.split('\t');
+      
+      // Converte os valores para números, usando 0 como fallback em caso de valor inválido ou ausente
+      const addedValue = Number(added) || 0;
+      const removedValue = Number(removed) || 0;
 
-      authorCount[author] = authorCount[author] ? authorCount[author] + Number(added) : Number(added);
+      authorCount[author] = authorCount[author] ? authorCount[author] + Number(addedValue) + Number(removedValue) : Number(addedValue) + Number(removedValue);
       fileContributors[line].add(author);
     }
   });
@@ -77,8 +85,10 @@ const busFactor = () => {
     const fileContributors = parseGitLog(logOutput);
     const busFactor = calculateBusFactor(fileContributors);
     const total = Object.keys(authorCount).reduce((acc, author) => acc + authorCount[author], 0);
-    const authorsFactor = Object.keys(authorCount).sort((a,b) => authorCount[b] - authorCount[a]).filter(author => Math.floor(authorCount[author] * 100 / total) > 0).map(author => `${author} (${Math.floor(authorCount[author] * 100 / total)}%)`).join(', ')
-    return { busFactor, authors: authorsFactor.replace(/“|”/g, "") };
+    const authorsFactor = Object.keys(authorCount).sort((a,b) => authorCount[b] - authorCount[a]).filter(author => Math.floor(authorCount[author] * 100 / total) >= 0.1).map(author => `${author} (${Math.floor(authorCount[author] * 100 / total)}%)`).join(', ')
+    const authorsLines = Object.keys(authorCount).sort((a,b) => authorCount[b] - authorCount[a]).filter(author => Math.floor(authorCount[author] * 100 / total) >= 0.1).map(author => `${author} (${Math.floor(authorCount[author])})`).join(', ')
+    
+  return { busFactor, authors: authorsFactor.replace(/“|”/g, ""), authorsLines: authorsLines.replace(/“|”/g, "") };
   };
   
 module.exports = { busFactor };
